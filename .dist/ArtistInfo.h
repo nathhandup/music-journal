@@ -9,9 +9,11 @@ struct ArtistInfo {
     std::vector<std::string> albums;
 };
 
-void printArtistInfo(struct ArtistInfo* obj);
-bool addName(std::string string, struct ArtistInfo* obj);
-void insert(int point, std::string name, std::vector<std::string> names);
-bool addAlbum(std::string string, struct ArtistInfo* obj);
+void printArtistInfo(const struct ArtistInfo* obj);
+bool addName(const std::string string, struct ArtistInfo* obj);
+void insert(const int point, 
+            const std::string name, 
+            std::vector<std::string>* names_pointer);
+bool addAlbum(const std::string string, struct ArtistInfo* obj);
 
 #endif
