@@ -9,8 +9,10 @@ struct Node {
 
 class LinkedList {
 public:
-    Node* head = NULL;
-    LinkedList();
+    Node* head;
+    LinkedList() {
+        head = NULL;
+    }
     ~LinkedList() {
         while(head) {
             Node* temp = head;

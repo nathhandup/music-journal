@@ -8,8 +8,7 @@ struct Node;
 // remove(void* value)
 class LinkedList {
 public:
-    LinkedList();
-    ~LinkedList();
+    Node* head;
     void push_front(void* value);
     void push_back(void* value);
     void print(void (*func)(void*)) const;
