@@ -6,6 +6,26 @@
 #include "ArtistInfo.h"
 
 int main(void) {
-    LinkedList MyObj; 
+    ArtistInfo* object;
+    while(1) {
+        std::cout << "addName, addAlbum, print, quit\n";
+        std::string intake;
+        std::cin >> intake;
+        if(intake == "addName") {
+            std::cout << "name?\n";
+            std::cin >> intake;
+            addName(intake, object);
+            printArtistInfo(object);
+        } else if(intake == "addAlbum") {
+            std::cout << "name?\n";
+            std::cin >> intake;
+            addAlbum(intake, object);
+            printArtistInfo(object);
+        } else if(intake == "print") {
+            printArtistInfo(object);
+        } else if(intake == "quit") {
+            break;
+        }
+    }
     return 0;
 }

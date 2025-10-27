@@ -16,4 +16,4 @@ public:
     bool remove(void* value, bool (*func)(void*, void*));
 };
 
-#define LINKEDLIST
+#endif
