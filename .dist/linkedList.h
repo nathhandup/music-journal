@@ -9,8 +9,7 @@ struct Node;
 class LinkedList {
 public:
     Node* head;
-    void push_front(void* value);
-    void push_back(void* value);
+    void push(void* value, bool (*compare)(void*, void*));
     void print(void (*func)(void*)) const;
-    bool remove(void* value);
+    bool remove(void* value, bool (*func)(void*, void*));
 };

@@ -6,5 +6,6 @@
 
 int main(void) {
     LinkedList MyObj;
+    
     return 0;
 }

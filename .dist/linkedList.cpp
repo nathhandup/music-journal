@@ -13,6 +13,7 @@ public:
     LinkedList() {
         head = NULL;
     }
+
     ~LinkedList() {
         while(head) {
             Node* temp = head;
@@ -21,23 +22,24 @@ public:
         }
     }
 
-    void push_front(void* value) {
-        Node* new_node = new Node(value);
-        new_node->next = head;
-        head = new_node;
-    }
-
-    void push_back(void* value) {
+    void push(void* value, bool (*compare)(void*, void*)) {
         Node* new_node = new Node(value);
         if(!head) {
             head = new_node;
             return;
         }
         Node* current = head;
-        while (current->next) {
+        Node* prev = NULL;
+        while (current) {
+            if(compare(current->data, new_node->data)) {
+                new_node->next = current;
+                if(prev) {
+                    prev->next = new_node;
+                }
+            }
+            prev = current;
             current = current->next;
         }
-        current->next = new_node;
     }
 
     void print(void (*func)(void*)) const {
@@ -49,11 +51,11 @@ public:
         std::cout << "NULL\n";
     }
 
-    bool remove(void* value) {
+    bool remove(void* value, bool (*func)(void*, void*)) {
         Node* current = head;
         Node* prev = NULL;
         while(current) {
-            if(current->data == value) {
+            if(func(value, current->data)) {
                 if(prev) {
                     prev->next = current->next;
                 } else {
