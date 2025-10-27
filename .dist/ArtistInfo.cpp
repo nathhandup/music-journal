@@ -1,9 +1,9 @@
-#include "ArtistInfo.h"
+#include "artistinfo.hpp"
 #include <iostream>
 
 void printArtistInfo(const struct ArtistInfo* obj) {
     std::cout << obj->name << "\n";
-    std::vector<std::string> objalbums = *(obj->albums);
+    std::vector<std::string> objalbums = obj->albums;
     if(objalbums.size() == 0) {
         return;
     } 
@@ -13,50 +13,24 @@ void printArtistInfo(const struct ArtistInfo* obj) {
     }
 }
 
-bool addName(const std::string string, struct ArtistInfo* obj) {
-    if(*(obj->name) == "") {
-        *(obj->name) = string;
+bool addName(const std::string line, struct ArtistInfo* obj) {
+    if(obj->name == "") {
+        obj->name = line;
         return 1;
     } 
     return 0;
 }
 
-void insert_name(const int point, 
-                 const std::string name, 
-                 std::vector<std::string>* names_pointer) {
-    std::string temp1;
-    std::string temp2;
-    std::vector<std::string> names = *names_pointer;
-    if(names.size() == 0) {
-        names[0] = name;
-        return;
-    }
-    for(int i = 0; i < names.size() + 1; i++) {
-        if(i == point) {
-            temp1 = names[i]; // temp 1 takes the value where name is
-            names[i] = name; // name is inserted
-            i++;
-            std::string temp2;
-            for(int j = i; j < names.size() + 1; j++) { // names[j] must become temp1
-                temp2 = names[j];
-                names[j] = temp1;
-                temp1 = temp2;
-            } //probably works. you should test this moron
-            break;
-        }
-    }
-}
-
-bool addAlbum(const std::string string, struct ArtistInfo* obj) {
-    std::vector<std::string> objalbums = *(obj->albums);
+bool addAlbum(const std::string line, struct ArtistInfo* obj) {
+    std::vector<std::string> objalbums = obj->albums;
     int size = objalbums.size();
     if(size == 0) {
-        objalbums[0] = string;
+        objalbums.push_back(line);
         return 1;
     }
     for(int i = 0; i < size; i++) {
-        if(string > objalbums[i]) {
-            insert_name(i, string, &objalbums);
+        if(line < objalbums[i]) {
+            objalbums.insert(objalbums.begin() + i, line);
             break;
             return 1;
         }

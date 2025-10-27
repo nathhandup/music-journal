@@ -3,7 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "ArtistInfo.h"
+#include "artistinfo.hpp"
 
 int main(void) {
     ArtistInfo* object = new ArtistInfo;
@@ -15,18 +15,18 @@ int main(void) {
             std::cout << "name?\n";
             std::cin >> intake;
             addName(intake, object);
-            //printArtistInfo(object);
+            printArtistInfo(object);
         } else if(intake == "addAlbum") {
             std::cout << "name?\n";
             std::cin >> intake;
-            //addAlbum(intake, object);
-            //printArtistInfo(object);
+            addAlbum(intake, object);
+            printArtistInfo(object);
         } else if(intake == "print") {
-            //printArtistInfo(object);
+            printArtistInfo(object);
         } else if(intake == "quit") {
             break;
         }
     }
-    free(object);
+    delete object;
     return 0;
 }
