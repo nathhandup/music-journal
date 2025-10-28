@@ -17,11 +17,13 @@ public:
     LinkedList();
     ~LinkedList();
     // pushes value to linked list and preserves ordering according to compare function
-    void pushinfo(ArtistInfo* value);
+    void pushData(ArtistInfo* value);
     // prints linked list
-    void printlist() const;
+    void printList() const;
     // removes value according to equality function given
-    bool removeinfo(std::string value);
+    bool removeData(std::string value);
+    // pulls data. returns null if not found
+    struct ArtistInfo* pullData(std::string value);
 };
 
 #endif

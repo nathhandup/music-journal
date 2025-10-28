@@ -20,13 +20,13 @@ LinkedList::~LinkedList() {
         delete temp;
     }
 }
-void LinkedList::pushinfo(ArtistInfo* value) {
+void LinkedList::pushData(ArtistInfo* value) {
     if(!value) {
-        std::cerr << "Error with LinkedList::pushinfo(ArtistInfo* value): Passed null\n";
+        std::cerr << "Error with LinkedList::pushData(ArtistInfo* value): Passed null\n";
         return;
     }
     // Case 1: empty list
-    if (head == nullptr) {
+    if (head == NULL) {
         head = new Node(value);
         return;
     }
@@ -50,24 +50,23 @@ void LinkedList::pushinfo(ArtistInfo* value) {
     current->next = newNode;
 }
 
-void LinkedList::printlist() const {
+void LinkedList::printList() const {
     Node* current = head;
     if(!head || !head->data) {
-        std::cerr << "Error with LinkedList::printlist(): List is null\n";
+        std::cerr << "Error with LinkedList::printList(): List is null\n";
         return;
     } 
+    std::cout << "---------------------\n";
     while (current && current->data) {
         printArtistInfo(current->data);
         current = current->next;
     }
-
-    std::cout << "------------------\n";
-
+    std::cout << "---------------------\n";
 }
 
-bool LinkedList::removeinfo(std::string value) {
+bool LinkedList::removeData(std::string value) {
     if (!head) {
-        std::cerr << "Error with LinkedList::removeinfo(ArtistInfo* value): Head is null\n";
+        std::cerr << "Error with LinkedList::removeData(ArtistInfo* value): Head is null\n";
         return -1;
     }
     Node* current = head;
@@ -89,3 +88,17 @@ bool LinkedList::removeinfo(std::string value) {
     std::cerr << "Error in LinkedList::removeinfo(std::string value): Cannot find passed value\n";
     return false;
 }   
+
+struct ArtistInfo* LinkedList::pullData (std::string value) {
+    if(!head) {
+        std::cerr << "Error in LinkedList::pullData(std::string value): Head Null\n";
+    }
+    Node* current = head;
+    while(current) {
+        if(current->data->name == value) {
+            return current->data;
+        }
+        current = current->next;
+    }
+    return NULL;
+}
