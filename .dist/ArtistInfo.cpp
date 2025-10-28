@@ -2,6 +2,10 @@
 #include <iostream>
 
 void printArtistInfo(const struct ArtistInfo* obj) {
+    if(!obj) { 
+        std::cerr << "Error in printArtistInfo: Passed null\n";
+        return;
+    }
     std::cout << obj->name << "\n";
     std::vector<std::string> objalbums = obj->albums;
     if(objalbums.size() == 0) {
@@ -14,6 +18,10 @@ void printArtistInfo(const struct ArtistInfo* obj) {
 }
 
 bool addName(const std::string line, struct ArtistInfo* obj) {
+    if(!obj) { 
+        std::cerr << "Error in printArtistInfo: Passed null\n";
+        return -1;
+    }
     if(obj->name == "") {
         obj->name = line;
         return 1;
@@ -22,6 +30,10 @@ bool addName(const std::string line, struct ArtistInfo* obj) {
 }
 
 bool addAlbum(const std::string line, struct ArtistInfo* obj) {
+    if(!obj) { 
+        std::cerr << "Error in printArtistInfo: Passed null\n";
+        return -1;
+    }
     int size = obj->albums.size();
     if(size == 0) {
         obj->albums.push_back(line);
@@ -41,6 +53,11 @@ bool addAlbum(const std::string line, struct ArtistInfo* obj) {
 }
 
 bool equal(const std::string line, struct ArtistInfo* obj) {
+    if(!obj) { 
+        std::cerr << "Error in printArtistInfo: Passed null\n";
+        return -1;
+    }
+
     if(line == obj->name) {
         return 1;
     }
@@ -48,8 +65,7 @@ bool equal(const std::string line, struct ArtistInfo* obj) {
 }
 
 bool before(struct ArtistInfo* a, struct ArtistInfo* b) {
-    if(a->name < b->name) {
-        return 1;
-    }
-    return 0;
+    if (!a) return true;     // treat null as "before" anything
+    if (!b) return false;    // nothing comes before null
+    return a->name < b->name;
 }

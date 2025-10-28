@@ -1,5 +1,5 @@
-#ifndef ARTISTINFO
-#define ARTISTINFO
+#ifndef ARTISTINFO_HPP
+#define ARTISTINFO_HPP
 
 #include <string>
 #include <vector>
