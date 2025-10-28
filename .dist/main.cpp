@@ -36,10 +36,15 @@ int main(void) {
 
     LinkedList* list = new LinkedList;
     ArtistInfo* obj1 = new ArtistInfo;
+    ArtistInfo* obj2 = new ArtistInfo;
+    addName("Nathan", obj1);
+    addAlbum("Crimson", obj1);
+    addName("Daniel", obj2);
+    addAlbum("Cake", obj2);
+    list->pushinfo(obj1);
+    list->pushinfo(obj2);
+    list->printlist();
     delete list;
-    delete obj1;
-
-
 
     return 0;
 }

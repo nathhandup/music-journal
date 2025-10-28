@@ -1,5 +1,6 @@
 #ifndef LINKEDLIST
 #define LINKEDLIST
+#include "artistinfo.hpp"
 
 // Node structure
 struct Node;
@@ -14,11 +15,11 @@ public:
     // head with all other nodes stored within
     Node* head;
     // pushes value to linked list and preserves ordering according to compare function
-    void push(void* value, bool (*compare)(void*, void*));
-    // prints linked list according to function given
-    void print(void (*func)(void*)) const;
+    void pushinfo(ArtistInfo* value);
+    // prints linked list
+    void printlist() const;
     // removes value according to equality function given
-    bool remove(void* value, bool (*func)(void*, void*));
+    bool removeinfo(ArtistInfo* value);
 };
 
 #endif
