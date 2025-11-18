@@ -2,12 +2,6 @@
 #include "artistinfo.hpp"
 #include "linkedlist.hpp"
 
-struct Node {
-    ArtistInfo* data;
-    Node* next;
-    Node(ArtistInfo* val) : data(val), next(NULL) {}
-};
-
 LinkedList::LinkedList() {
     head = NULL;
 }
@@ -33,6 +27,10 @@ void LinkedList::pushData(ArtistInfo* value) {
 
     // Case 2: new node should go before the head
     if (before(value, head->data)) {
+        if(value->name == head->data->name) {
+            std::cerr << "Error in LinkedList::pushData(ArtistInfo* value): Name Already Exits\n";
+            return;
+        }
         Node* newNode = new Node(value);
         newNode->next = head;
         head = newNode;
@@ -44,7 +42,10 @@ void LinkedList::pushData(ArtistInfo* value) {
     while (current->next && !before(value, current->next->data)) {
         current = current->next;
     }
-
+    if(value->name == current->data->name) {
+        std::cerr << "Error in LinkedList::pushData(ArtistInfo* value): Name Already Exits\n";
+        return;
+    }
     Node* newNode = new Node(value);
     newNode->next = current->next;
     current->next = newNode;

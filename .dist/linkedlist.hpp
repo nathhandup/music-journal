@@ -3,7 +3,11 @@
 #include "artistinfo.hpp"
 
 // Node structure
-struct Node;
+struct Node {
+    ArtistInfo* data;
+    Node* next;
+    Node(ArtistInfo* val) : data(val), next(NULL) {}
+};
 
 // LinkedList structure. Includes:
 // push_front(void* value)
