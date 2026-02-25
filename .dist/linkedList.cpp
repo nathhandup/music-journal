@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string.h>
 #include "artistInfo.hpp"
 #include "linkedList.hpp"
 
@@ -16,7 +17,7 @@ LinkedList::~LinkedList() {
 }
 void LinkedList::pushData(ArtistInfo* value) {
     if(!value) {
-        std::cerr << "Error with LinkedList::pushData(ArtistInfo* value): Passed null\n";
+        std::cerr << "Error with LinkedList::pushData(): Passed null\n";
         return;
     }
     // Case 1: empty list
@@ -28,7 +29,7 @@ void LinkedList::pushData(ArtistInfo* value) {
     // Case 2: new node should go before the head
     if (before(value, head->data)) {
         if(value->name == head->data->name) {
-            std::cerr << "Error in LinkedList::pushData(ArtistInfo* value): Name Already Exits\n";
+            std::cerr << "Error in LinkedList::pushData(): Name Already Exits\n";
             return;
         }
         Node* newNode = new Node(value);
@@ -43,13 +44,25 @@ void LinkedList::pushData(ArtistInfo* value) {
         current = current->next;
     }
     if(value->name == current->data->name) {
-        std::cerr << "Error in LinkedList::pushData(ArtistInfo* value): Name Already Exits\n";
+        std::cerr << "Error in LinkedList::pushData(): Name Already Exits\n";
         return;
     }
     Node* newNode = new Node(value);
     newNode->next = current->next;
     current->next = newNode;
 }
+
+bool LinkedList::createData(LinkedList* list, std::string name) {
+    if (name.length() == 0 || list == NULL) {
+        std::cerr << "Error with LinkedList::createData(): Name is not valid\n";
+        return 0;
+    }
+    struct ArtistInfo* temp = new ArtistInfo;
+    addName(name, temp);
+    list->pushData(temp);
+    return 1;
+}
+
 
 void LinkedList::printList() const {
     Node* current = head;
@@ -65,7 +78,7 @@ void LinkedList::printList() const {
 
 bool LinkedList::removeData(std::string value) {
     if (!head) {
-        std::cerr << "Error with LinkedList::removeData(ArtistInfo* value): Head is null\n";
+        std::cerr << "Error with LinkedList::removeData(): Head is null\n";
         return -1;
     }
     Node* current = head;
@@ -84,13 +97,13 @@ bool LinkedList::removeData(std::string value) {
         prev = current;
         current = current->next;
     }
-    std::cerr << "Error in LinkedList::removeinfo(std::string value): Cannot find passed value\n";
+    std::cerr << "Error in LinkedList::removeData(): Cannot find passed value\n";
     return false;
 }   
 
 struct ArtistInfo* LinkedList::pullData (std::string value) {
     if(!head) {
-        std::cerr << "Error in LinkedList::pullData(std::string value): Head Null\n";
+        std::cerr << "Error in LinkedList::pullData(): Head Null\n";
     }
     Node* current = head;
     while(current) {
@@ -99,5 +112,6 @@ struct ArtistInfo* LinkedList::pullData (std::string value) {
         }
         current = current->next;
     }
+    std::cerr << "Error in LinkedList::pullData(): Could not find specified\n";
     return NULL;
 }

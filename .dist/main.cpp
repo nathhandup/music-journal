@@ -7,6 +7,51 @@
 #include "linkedList.hpp"
 #include "saveFeatures.hpp"
 
+bool _add_artist(LinkedList* list) {
+    std::cout << "Provide the artist's name: \n";
+    /* Grab name */
+    std::string intakename;
+    std::getline(std::cin, intakename);
+    // Creates ArtistInfo object and adds it to linkedlist
+    if  (!list->createData(list, intakename)) {
+        return false;
+    }
+    std::cout << "Successfully Added !\n";
+    return true;
+}   
+
+bool _add_album_to_artist(LinkedList* list) {
+    std::cout << "Provide the artist's name:\n";
+    /* Grab name */
+    std::string intakename;
+    std::getline(std::cin, intakename);
+    /* Pull data from list */
+    struct ArtistInfo* temp = list->pullData(intakename);
+    /* Error check */
+    if(!temp) {
+        return false;
+    }
+    std::cout << "Provide the album's name\n";
+    /* Grab name */
+    std::getline(std::cin, intakename);
+    /* Add album to artistInfo object */
+    addAlbum(intakename, temp);
+    std::cout << "Album " << intakename << "successfully added to artist !\n";  
+    return true;      
+}
+
+bool _remove_artist(LinkedList* list) {
+    std::cout << "Provide the artist's name:\n";
+    /* Grab data */
+    std::string intakename;
+    std::getline(std::cin, intakename);
+    /* Remove data & error check within function */
+    if (!list->removeData(intakename)) {
+        return false;
+    }
+    std::cout << "Successfully removed !\n";
+    return true;
+}
 
 int main(void) {
     LinkedList* list = loadList();
@@ -21,31 +66,11 @@ int main(void) {
         std::getline(std::cin, intake);
         
         if(intake == "AA") {
-            std::cout << "Provide the artist's name: \n";
-            std::string intakename;
-            std::getline(std::cin, intakename);
-            struct ArtistInfo* temp = new ArtistInfo;
-            addName(intakename, temp);
-            list->pushData(temp);
-            std::cout << "Successfully Added !\n";
+            _add_artist(list);
         } else if(intake == "AAA") {
-            std::cout << "Provide the artist's name:\n";
-            std::string intakename;
-            std::getline(std::cin, intakename);
-            struct ArtistInfo* temp = list->pullData(intakename);
-            if(!temp) {
-                continue;
-            }
-            std::cout << "Provide the album's name\n";
-            std::getline(std::cin, intakename);
-            addAlbum(intakename, temp);
-            std::cout << "Album " << intakename << "successfully added to artist !\n";
+            _add_album_to_artist(list);
         } else if(intake == "RA") {
-            std::cout << "Provide the artist's name:\n";
-            std::string intakename;
-            std::getline(std::cin, intakename);
-            list->removeData(intakename);
-            std::cout << "Successfully removed !\n";
+            _remove_artist(list);
         } else if(intake == "P") {
             list->printList();
         } else if(intake == "Q") {  
